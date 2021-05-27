@@ -1,0 +1,31 @@
+---
+
+- hosts: localhost
+  tasks:
+
+  - name: Remove self-provisioner from system:authenticated:oauth group
+    k8s:
+      apply: yes
+      definition:
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        metadata:
+          annotations:
+            rbac.authorization.kubernetes.io/autoupdate: "false"
+          name: self-provisioners
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: self-provisioner
+        subjects:
+
+  - name: Update Project request message
+    k8s:
+      apply: yes
+      definition:
+        apiVersion: config.openshift.io/v1
+        kind: Project
+        metadata:
+          name: cluster
+        spec:
+          projectRequestMessage: To request a project, contact your system administrator
