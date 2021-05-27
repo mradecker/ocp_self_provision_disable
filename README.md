@@ -14,5 +14,4 @@ Make sure your host reflects your host or run as localhost.  Also, if you want t
 
 oc edit project.config.openshift.io/cluster
 
-spec:
-  projectRequestMessage: To request a project, contact your system administrator
+projectRequestMessage: To request a project, contact your system administrator
